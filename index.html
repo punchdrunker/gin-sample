@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title>{{.Title}}</title>
+        <style type="text/css">  
+            <!-- 
+            table{
+            border-collapse: collapse;
+            }
+
+            th{
+            width: 25%;
+            padding: 6px;
+            text-align: left;
+            vertical-align: top;
+            color: #333;
+            background-color: #eee;
+            border: 1px solid #b9b9b9;
+            }
+
+            td{
+            padding: 6px;
+            background-color: #fff;
+            border: 1px solid #b9b9b9;
+            }
+            -->  
+        </style>  
+    </head>
+    <body>
+        <h1>{{.Title}}</h1>
+
+        <form action="/add" method="POST">
+            <input type="text" name="name">
+            <input type="submit" value="add member">
+        </form>
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>operation</th>
+            </tr>
+            {{range $m :=.Members}}
+            <tr>
+                <td>{{$m.Name}}</td>
+                <td>
+                    <form action="/delete" method="POST">
+                        <input type="hidden" name="id" value="{{$m.Id}}">
+                        <input type="submit" value="delete member">
+                    </form>
+                </td>
+            </tr>
+            {{end}}
+        </table>
+    </body>
+</html>
